@@ -1,0 +1,229 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --primary-accent: #3882f6;
+    --primary-accent-hover: #5a9bff;
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --border-color: #2c2c2c;
+    --voted-green: #28a745; /* New color for voted state */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styling */
+.site-header {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80) no-repeat center center/cover;
+    border-bottom: 2px solid var(--primary-accent);
+}
+
+.site-header h1 {
+    font-size: 3rem;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+/* --- Section Heading --- */
+.section-heading {
+    text-align: center;
+    color: var(--heading-color);
+    font-size: 2.2rem;
+    font-weight: 600;
+    padding-top: 50px;
+    margin-bottom: 40px;
+}
+
+
+/* Card Grid Layout */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding-bottom: 60px;
+}
+
+/* Individual Card Styling */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.card.visible {
+    /* Animation final state */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(56, 130, 246, 0.4);
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card-content h2 {
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.card-content p {
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+/* Vote Button Styling */
+.vote-btn {
+    display: flex; /* Changed to flex for icon alignment */
+    align-items: center; /* Vertically center icon and text */
+    justify-content: center; /* Horizontally center icon and text */
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.vote-btn:hover {
+    background-color: var(--primary-accent-hover);
+    transform: scale(1.03);
+}
+
+/* --- Voted Button State --- */
+.vote-btn.voted {
+    background-color: var(--voted-green);
+    cursor: default; /* No hover effect when voted */
+    pointer-events: none; /* Disable clicks */
+    transform: none; /* Remove hover scaling */
+}
+
+.vote-btn.voted:hover {
+    background-color: var(--voted-green); /* Keep green on hover */
+    transform: none;
+}
+
+/* Green Tick Animation */
+.vote-btn .fa-check-circle {
+    margin-right: 8px; /* Space between icon and text */
+    opacity: 0;
+    transform: scale(0);
+    animation: tickAppear 0.5s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes tickAppear {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Footer Styling */
+.site-footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid var(--border-color);
+    color: #888;
+}
+
+/* --- Individual Contestant Page Layout --- */
+.single-contestant-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px); /* Adjust height for header/footer */
+}
+
+.single-contestant-view .card-container {
+    display: flex; /* Override grid to ensure single card centering */
+    justify-content: center;
+    max-width: 400px; /* Limit width of single card */
+    width: 100%;
+    padding: 30px 0;
+}
+
+.single-card-display .card {
+    width: 100%; /* Ensure card takes max-width */
+}
+
+.back-to-home {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: var(--primary-accent);
+    color: white;
+    border-color: var(--primary-accent);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .site-header h1 {
+        font-size: 2.5rem;
+    }
+    .section-heading {
+        font-size: 1.8rem;
+    }
+}
