@@ -7,7 +7,7 @@
     --heading-color: #ffffff;
     --shadow-color: rgba(0, 0, 0, 0.5);
     --border-color: #2c2c2c;
-    --voted-green: #28a745; /* New color for voted state */
+    --voted-green: #28a745;
 }
 
 * {
@@ -21,6 +21,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden; 
 }
 
 .container {
@@ -28,6 +29,7 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
+
 
 /* Header Styling */
 .site-header {
@@ -37,6 +39,10 @@ body {
     border-bottom: 2px solid var(--primary-accent);
 }
 
+.site-header .container {
+    position: relative; 
+}
+
 .site-header h1 {
     font-size: 3rem;
     color: var(--heading-color);
@@ -44,15 +50,140 @@ body {
     font-weight: 700;
 }
 
-/* --- Section Heading --- */
+/* --- Golden Text & Confetti Styles --- */
+.heading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-top: 50px;
+}
+
 .section-heading {
     text-align: center;
-    color: var(--heading-color);
-    font-size: 2.2rem;
+    font-size: 2.5rem; /* Increased font size */
     font-weight: 600;
-    padding-top: 50px;
-    margin-bottom: 40px;
+    padding: 0 20px;
+    margin-bottom: 0;
+    padding-top: 0;
+    z-index: 2;
+    background: linear-gradient(145deg, #ffffcc, #ffd700, #c8a415);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: 
+        text-glow-subtle 2.5s ease-in-out infinite alternate,
+        pop-up 2s ease-in-out infinite;
 }
+
+@keyframes text-glow-subtle {
+    from {
+        text-shadow: 0 0 4px #ffc107, 0 0 8px rgba(255, 193, 7, 0.5);
+    }
+    to {
+        text-shadow: 0 0 8px #ffd700, 0 0 16px rgba(255, 193, 7, 0.7);
+    }
+}
+
+@keyframes pop-up {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); } /* Increased pop scale */
+    100% { transform: scale(1); }
+}
+
+
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.confetti-container i {
+    position: absolute;
+    width: 6px; 
+    height: 10px; 
+    background: #f00; 
+    top: -20px; 
+    opacity: 0;
+    animation: fall-full-page 5s linear forwards; 
+}
+
+@keyframes fall-full-page {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Faster animation durations */
+.confetti-container i:nth-child(60n + 1) { left: 1%; animation-delay: 0.1s; animation-duration: 2.5s; background: #ffc107; }
+.confetti-container i:nth-child(60n + 2) { left: 3%; animation-delay: 3.2s; animation-duration: 3.0s; background: #e91e63; }
+.confetti-container i:nth-child(60n + 3) { left: 5%; animation-delay: 6.5s; animation-duration: 2.2s; background: #4caf50; }
+.confetti-container i:nth-child(60n + 4) { left: 7%; animation-delay: 9.1s; animation-duration: 3.1s; background: #3f51b5; }
+.confetti-container i:nth-child(60n + 5) { left: 9%; animation-delay: 1.9s; animation-duration: 2.4s; background: #ff5722; }
+.confetti-container i:nth-child(60n + 6) { left: 11%; animation-delay: 4.5s; animation-duration: 3.3s; background: #00bcd4; }
+.confetti-container i:nth-child(60n + 7) { left: 13%; animation-delay: 7.2s; animation-duration: 2.6s; background: #9c27b0; }
+.confetti-container i:nth-child(60n + 8) { left: 15%; animation-delay: 10.0s; animation-duration: 3.2s; background: #cddc39; }
+.confetti-container i:nth-child(60n + 9) { left: 17%; animation-delay: 0.8s; animation-duration: 2.8s; background: #03a9f4; }
+.confetti-container i:nth-child(60n + 10){ left: 19%; animation-delay: 3.9s; animation-duration: 2.9s; background: #f44336; }
+.confetti-container i:nth-child(60n + 11){ left: 21%; animation-delay: 6.1s; animation-duration: 2.3s; background: #ffeb3b; }
+.confetti-container i:nth-child(60n + 12){ left: 23%; animation-delay: 8.8s; animation-duration: 3.4s; background: #673ab7; }
+.confetti-container i:nth-child(60n + 13){ left: 25%; animation-delay: 1.1s; animation-duration: 2.1s; background: #8bc34a; }
+.confetti-container i:nth-child(60n + 14){ left: 27%; animation-delay: 5.5s; animation-duration: 3.6s; background: #607d8b; }
+.confetti-container i:nth-child(60n + 15){ left: 29%;  animation-delay: 8.4s; animation-duration: 2.7s; background: #ff9800; }
+.confetti-container i:nth-child(60n + 16){ left: 31%;  animation-delay: 2.9s; animation-duration: 2.8s; background: #e91e63; }
+.confetti-container i:nth-child(60n + 17){ left: 33%;  animation-delay: 7.5s; animation-duration: 2.9s; background: #4caf50; }
+.confetti-container i:nth-child(60n + 18){ left: 35%;  animation-delay: 10.2s; animation-duration: 3.5s; background: #3f51b5; }
+.confetti-container i:nth-child(60n + 19){ left: 37%;  animation-delay: 0.4s; animation-duration: 2.4s; background: #ff5722; }
+.confetti-container i:nth-child(60n + 20){ left: 39%;   animation-delay: 2.5s; animation-duration: 3.7s; background: #00bcd4; }
+.confetti-container i:nth-child(60n + 21){ left: 41%; animation-delay: 5.1s; animation-duration: 2.2s; background: #cddc39; }
+.confetti-container i:nth-child(60n + 22){ left: 43%; animation-delay: 8.0s; animation-duration: 3.8s; background: #ffc107; }
+.confetti-container i:nth-child(60n + 23){ left: 45%; animation-delay: 2.3s; animation-duration: 2.9s; background: #9c27b0; }
+.confetti-container i:nth-child(60n + 24){ left: 47%; animation-delay: 9.5s; animation-duration: 3.3s; background: #4caf50; }
+.confetti-container i:nth-child(60n + 25){ left: 49%; animation-delay: 0.7s; animation-duration: 2.7s; background: #ff5722; }
+.confetti-container i:nth-child(60n + 26){ left: 51%; animation-delay: 3.5s; animation-duration: 3.1s; background: #e91e63; }
+.confetti-container i:nth-child(60n + 27){ left: 53%; animation-delay: 6.8s; animation-duration: 2.5s; background: #03a9f4; }
+.confetti-container i:nth-child(60n + 28){ left: 55%; animation-delay: 10.5s; animation-duration: 3.9s; background: #673ab7; }
+.confetti-container i:nth-child(60n + 29){ left: 57%; animation-delay: 1.3s; animation-duration: 2.0s; background: #8bc34a; }
+.confetti-container i:nth-child(60n + 30){ left: 59%; animation-delay: 4.8s; animation-duration: 4.0s; background: #f44336; }
+.confetti-container i:nth-child(60n + 31){ left: 61%; animation-delay: 7.9s; animation-duration: 2.8s; background: #ffeb3b; }
+.confetti-container i:nth-child(60n + 32){ left: 63%; animation-delay: 11.0s; animation-duration: 3.5s; background: #607d8b; }
+.confetti-container i:nth-child(60n + 33){ left: 65%; animation-delay: 0.2s; animation-duration: 2.6s; background: #ff9800; }
+.confetti-container i:nth-child(60n + 34){ left: 67%; animation-delay: 2.8s; animation-duration: 3.2s; background: #3f51b5; }
+.confetti-container i:nth-child(60n + 35){ left: 69%;  animation-delay: 5.8s; animation-duration: 2.1s; background: #9c27b0; }
+.confetti-container i:nth-child(60n + 36){ left: 71%;  animation-delay: 8.1s; animation-duration: 4.1s; background: #cddc39; }
+.confetti-container i:nth-child(60n + 37){ left: 73%;  animation-delay: 3.3s; animation-duration: 2.9s; background: #e91e63; }
+.confetti-container i:nth-child(60n + 38){ left: 75%;  animation-delay: 9.8s; animation-duration: 3.7s; background: #4caf50; }
+.confetti-container i:nth-child(60n + 39){ left: 77%;  animation-delay: 0.6s; animation-duration: 2.4s; background: #ff5722; }
+.confetti-container i:nth-child(60n + 40){ left: 79%;   animation-delay: 4.0s; animation-duration: 4.3s; background: #00bcd4; }
+.confetti-container i:nth-child(60n + 41){ left: 81%;  animation-delay: 7.0s; animation-duration: 3.0s; background: #ffc107; }
+.confetti-container i:nth-child(60n + 42){ left: 83%;  animation-delay: 1.2s; animation-duration: 3.5s; background: #e91e63; }
+.confetti-container i:nth-child(60n + 43){ left: 85%;  animation-delay: 4.2s; animation-duration: 2.6s; background: #4caf50; }
+.confetti-container i:nth-child(60n + 44){ left: 87%;  animation-delay: 8.5s; animation-duration: 3.8s; background: #3f51b5; }
+.confetti-container i:nth-child(60n + 45){ left: 89%;  animation-delay: 2.1s; animation-duration: 2.9s; background: #ff5722; }
+.confetti-container i:nth-child(60n + 46){ left: 91%;  animation-delay: 6.3s; animation-duration: 3.7s; background: #00bcd4; }
+.confetti-container i:nth-child(60n + 47){ left: 93%;  animation-delay: 9.0s; animation-duration: 2.8s; background: #9c27b0; }
+.confetti-container i:nth-child(60n + 48){ left: 95%;  animation-delay: 3.0s; animation-duration: 3.6s; background: #cddc39; }
+.confetti-container i:nth-child(60n + 49){ left: 97%;  animation-delay: 5.3s; animation-duration: 2.5s; background: #03a9f4; }
+.confetti-container i:nth-child(60n + 50){ left: 99%;  animation-delay: 1.0s; animation-duration: 4.0s; background: #f44336; }
+.confetti-container i:nth-child(60n + 51){ left: 4%;   animation-delay: 7.8s; animation-duration: 2.9s; background: #ffeb3b; }
+.confetti-container i:nth-child(60n + 52){ left: 8%;   animation-delay: 2.0s; animation-duration: 3.8s; background: #673ab7; }
+.confetti-container i:nth-child(60n + 53){ left: 14%;  animation-delay: 6.0s; animation-duration: 2.7s; background: #8bc34a; }
+.confetti-container i:nth-child(60n + 54){ left: 24%;  animation-delay: 10.8s; animation-duration: 3.9s; background: #607d8b; }
+.confetti-container i:nth-child(60n + 55){ left: 34%;   animation-delay: 1.7s; animation-duration: 2.8s; background: #ff9800; }
+.confetti-container i:nth-child(60n + 56){ left: 44%;   animation-delay: 5.0s; animation-duration: 3.2s; background: #e91e63; }
+.confetti-container i:nth-child(60n + 57){ left: 54%;   animation-delay: 8.3s; animation-duration: 2.9s; background: #4caf50; }
+.confetti-container i:nth-child(60n + 58){ left: 64%;   animation-delay: 3.7s; animation-duration: 3.8s; background: #3f51b5; }
+.confetti-container i:nth-child(60n + 59){ left: 74%;   animation-delay: 9.3s; animation-duration: 2.6s; background: #ff5722; }
+.confetti-container i:nth-child(60n + 60){ left: 84%;   animation-delay: 0.9s; animation-duration: 4.0s; background: #00bcd4; }
 
 
 /* Card Grid Layout */
@@ -71,17 +202,8 @@ body {
     box-shadow: 0 10px 30px var(--shadow-color);
     border: 1px solid var(--border-color);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
-    
-    /* Animation initial state */
-    opacity: 0;
-    transform: translateY(30px);
 }
 
-.card.visible {
-    /* Animation final state */
-    opacity: 1;
-    transform: translateY(0);
-}
 
 .card:hover {
     transform: translateY(-10px);
@@ -112,9 +234,9 @@ body {
 
 /* Vote Button Styling */
 .vote-btn {
-    display: flex; /* Changed to flex for icon alignment */
-    align-items: center; /* Vertically center icon and text */
-    justify-content: center; /* Horizontally center icon and text */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     width: 100%;
     padding: 15px;
     background-color: var(--primary-accent);
@@ -132,22 +254,20 @@ body {
     transform: scale(1.03);
 }
 
-/* --- Voted Button State --- */
 .vote-btn.voted {
     background-color: var(--voted-green);
-    cursor: default; /* No hover effect when voted */
-    pointer-events: none; /* Disable clicks */
-    transform: none; /* Remove hover scaling */
+    cursor: default; 
+    pointer-events: none; 
+    transform: none; 
 }
 
 .vote-btn.voted:hover {
-    background-color: var(--voted-green); /* Keep green on hover */
+    background-color: var(--voted-green); 
     transform: none;
 }
 
-/* Green Tick Animation */
 .vote-btn .fa-check-circle {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px; 
     opacity: 0;
     transform: scale(0);
     animation: tickAppear 0.5s ease-out forwards;
@@ -155,14 +275,8 @@ body {
 }
 
 @keyframes tickAppear {
-    from {
-        opacity: 0;
-        transform: scale(0);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 
@@ -174,56 +288,12 @@ body {
     color: #888;
 }
 
-/* --- Individual Contestant Page Layout --- */
-.single-contestant-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 200px); /* Adjust height for header/footer */
-}
-
-.single-contestant-view .card-container {
-    display: flex; /* Override grid to ensure single card centering */
-    justify-content: center;
-    max-width: 400px; /* Limit width of single card */
-    width: 100%;
-    padding: 30px 0;
-}
-
-.single-card-display .card {
-    width: 100%; /* Ensure card takes max-width */
-}
-
-.back-to-home {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.btn-back {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-.btn-back:hover {
-    background-color: var(--primary-accent);
-    color: white;
-    border-color: var(--primary-accent);
-}
-
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .site-header h1 {
         font-size: 2.5rem;
     }
     .section-heading {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
     }
 }
