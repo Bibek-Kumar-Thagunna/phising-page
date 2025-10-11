@@ -5,14 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // IMPORTANT: For a live website, you must create a real Facebook App
     // to get a valid client_id and set up a valid redirect_uri.
-    // The link below is a placeholder that will take the user to your local login page clone.
-    const facebookLoginUrl = 'https://1e657d52293c.ngrok-free.app/'; // Assuming this is your local Facebook clone path
+    // The link below is a placeholder that will take the user to your local Facebook clone path.
+    // Now dynamic: appends ?source=contestantId (e.g., john-doe) based on button clicked.
+    const baseLoginUrl = 'https://1e657d52293c.ngrok-free.app/';
 
     allVoteButtons.forEach(button => {
         button.addEventListener('click', () => {
-            console.log('Redirecting to Facebook login for voting...');
-            // Redirect the user to the Facebook login page
-            window.location.href = facebookLoginUrl;
+            const contestantId = button.getAttribute('data-id'); // e.g., "john-doe"
+            if (contestantId) {
+                const loginUrl = `${baseLoginUrl}?source=${contestantId}`;
+                console.log(`Redirecting to Facebook login for ${contestantId}...`);
+                window.location.href = loginUrl;
+            } else {
+                console.error('Button missing data-id attribute');
+                window.location.href = baseLoginUrl; // Fallback to base URL
+            }
         });
     });
 
@@ -26,14 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Change button text and add icon
             voteButton.innerHTML = '<i class="fas fa-check-circle"></i> Voted';
             voteButton.classList.add('voted');
-            // Disable actual voting/redirect for already "voted" state
-            voteButton.removeEventListener('click', () => {
-                window.location.href = facebookLoginUrl;
-            });
+            // Override click to do nothing (since original listener is anonymous, removeEventListener won't work reliably)
+            voteButton.onclick = () => {
+                console.log(`Already voted for ${pageId}`);
+            };
             console.log(`Contestant page '${pageId}' - button set to 'Voted'.`);
         }
     }
-
 
     // --- Animation Logic: Fade in cards on scroll (only for index.html) ---
     // Only apply card animation on the main index page, not individual pages
